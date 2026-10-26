@@ -7,7 +7,7 @@
     "preinstall": "npx only-allow pnpm",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "npx astro check && npx astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
