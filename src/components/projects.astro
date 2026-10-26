@@ -1,0 +1,181 @@
+---
+interface Project {
+  title: string;
+  image: string;
+  link: string;
+  preview: string;
+  status: string;
+  description: string[];
+  tags: string[];
+}
+
+// Xử lý base URL an toàn cho Astro
+const rawBase = import.meta.env.BASE_URL || "/";
+const baseUrl = rawBase.endsWith("/") ? rawBase.slice(0, -1) : rawBase;
+
+const projects: Project[] = [
+  {
+    title: "Robot 2D Game",
+    image: "/img/robot2d.PNG",
+    link: "https://github.com/QuangHuyLyTran/RobotGame2D",
+    preview: "https://quanghuylytran.itch.io/robotgame2d-adventure",
+    status: "Personal Project",
+    description: [
+      "Developed an action adventure platformer game built on Unity.",
+      "Programmed core character controllers managing running, jumping, and gravity physics with Rigidbody2D.",
+      "Designed interactive level hazards such as rotating traps and spikes, implemented collectible coin mechanics with dynamic score tracking, and structured multi-layer tilemaps for level design."
+    ],
+    tags: ["Unity", "C#", "Platformer", "Tilemap", "Game Logic"],
+  },
+  {
+    title: "Chess 3D Unity Game",
+    image: "/img/chess3d.PNG",
+    link: "https://github.com/QuangHuyLyTran/Chess_3D",
+    preview: "https://quanghuylytran.itch.io/chess-3d-2-player-game",
+    status: "Personal Project",
+    description: [
+      "Developed a fully-featured 3D chess game simulating standard international chess rules for local two-player matches.",
+      "Programmed complex movement logic and validation rules for all standard pieces (Pawn, Rook, Knight, Bishop, Queen, King), including specialized check and checkmate detection states.",
+      "Integrated match series scoring systems, flexible match timers, and an interactive 3D/2D camera perspective toggle panel."
+    ],
+    tags: ["Unity 3D", "C#", "OOP", "Game Logic", "Custom Physics"],
+  },
+  {
+    title: "Color Gun FPS Online",
+    image: "/img/colorgun3d.PNG",
+    link: "https://github.com/QuangHuyLyTran/ColorGun",
+    preview: "https://quanghuylytran.itch.io/colorgun3d-online-shooter-game-fps",
+    status: "Personal Project",
+    description: [
+      "Designed and engineered a lightweight multiplayer first-person shooter game using Unity 3D and Photon Unity Network (PUN).",
+      "Built robust cloud-based networking logic to handle room creation, matchmaking, and seamless real-time player state synchronization.",
+      "Developed core gameplay systems including Raycast-based shooting mechanics, custom health and damage handling (IDamageable), ammunition tracking, and reload mechanics.",
+      "Implemented movement interpolation and prediction algorithms to minimize network latency over UDP."
+    ],
+    tags: ["Unity 3D", "Photon PUN", "C#", "Client-Server", "Multiplayer"],
+  },
+  {
+    title: "Sơn Thủy Phân Tranh (Teamobi)",
+    image: "/img/stpt.webp",
+    link: "https://play.google.com/store/apps/details?id=com.team.sttt",
+    preview: "",
+    status: "Live on GooglePlay",
+    description: [
+      "Developed commercial online multiplayer games published on Google Play as a Software Engineer at Teamobi company.",
+      "Handled UI rendering systems and custom animation controllers using C# and Java GDX.",
+      "Implemented real-time client-server communication via WebSockets for seamless in-game event serialization.",
+      "Optimized overall performance using Object Pooling and efficient memory management to sustain stable frame rates across Android, iOS, and PC builds."
+    ],
+    tags: ["Unity", "Java GDX", "WebSocket", "Object Pooling", "IOS GDX", "Android"],
+  },
+  {
+    title: "Match-3 Puzzle Game",
+    image: "/img/Match-3.PNG",
+    link: "https://github.com/QuangHuyLyTran/Match_3",
+    preview: "https://quanghuylytran.itch.io/demo-match-3",
+    status: "Personal Project",
+    description: [
+      "Built entirely from scratch following a strict Model-View-Controller (MVC) architectural pattern to cleanly decouple game logic, grid data management, and UI layers.",
+      "Programmed advanced matrix grid controls, match detection algorithms, automatic board reshuffling for deadlock states, and efficient Object Pooling.",
+      "Optimized to minimize garbage collection and draw calls for WebGL and Mobile platforms."
+    ],
+    tags: ["Unity", "C#", "MVC Architecture", "Algorithms", "WebGL & Mobile"],
+  },
+  {
+    title: "Magic Tiles 2D Rhythm Game",
+    image: "/img/demo_magictiles.jpg",
+    link: "https://github.com/QuangHuyLyTran/Magic-Piano-Tiles",
+    preview: "https://quanghuylytran.itch.io/demo-magictiles",
+    status: "Personal Project",
+    description: [
+      "Created a responsive 2D rhythm game centered around precise real-time audio synchronization.",
+      "Implemented dynamic note spawning driven by audio file timestamps (Audio DSP) to ensure gameplay events match the music track perfectly.",
+      "Developed multi-touch input handling, combo scoring logic, dynamic speed scaling, and stable 60 FPS performance optimization using Object Pooling."
+    ],
+    tags: ["Unity", "C#", "Audio DSP", "Multi-touch", "Performance Optimization"],
+  },
+];
+---
+
+<section
+  id="projects"
+  class="py-12 border-t border-[#ffffff10] text-[var(--white)]"
+>
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">My work</h2>
+    <h3 class="text-4xl md:text-5xl font-medium mb-8">Projects</h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {
+        projects.map((project) => (
+          <div class="group bg-[#14141460] border border-[var(--white-icon-tr)] rounded-2xl p-5 flex flex-col justify-between hover:border-[var(--sec)] transition-all duration-300">
+            <div>
+              <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                <img
+                  src={project.image.startsWith("http") ? project.image : `${baseUrl}${project.image}`}
+                  alt={project.title}
+                  class="w-full h-48 md:h-60 object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              
+              <!-- Fixed Header Layout -->
+              <div class="flex items-start justify-between gap-4 mb-3">
+                <h4 class="text-2xl font-semibold leading-snug flex-1">{project.title}</h4>
+                <span class="py-1 px-3 text-xs font-medium rounded-full bg-[#1f1f1f] text-[var(--sec)] border border-[#ffffff15] whitespace-nowrap shrink-0">
+                  {project.status}
+                </span>
+              </div>
+              
+              <!-- Description Bullet Points -->
+              <ul class="text-sm text-[var(--white-icon)] mb-4 space-y-1.5 list-disc list-inside leading-relaxed">
+                {
+                  project.description.map((desc) => (
+                    <li>{desc}</li>
+                  ))
+                }
+              </ul>
+              
+              <!-- Tech Stack Tags -->
+              <div class="flex flex-wrap gap-2 mb-6">
+                {project.tags.map((tag) => (
+                  <span class="text-xs px-2.5 py-1 rounded-md bg-[#1f1f1f] text-[var(--white)] border border-[#ffffff10]">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <!-- Action Links -->
+            <div class="flex items-center gap-3 pt-4 border-t border-[#ffffff10]">
+              <a
+                target="_blank"
+                href={project.link}
+                class="flex-1 flex justify-center items-center gap-2 text-sm text-[var(--white-icon)] hover:text-white transition duration-300 border border-[var(--white-icon-tr)] py-2.5 px-4 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
+              >
+                <span>
+                  {project.link.includes("play.google.com") ? "Google Play" : "View Code"}
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+                  <path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z" />
+                </svg>
+              </a>
+
+              {project.preview && (
+                <a
+                  target="_blank"
+                  href={project.preview}
+                  class="flex-1 flex justify-center items-center gap-2 text-sm text-black font-medium transition duration-300 border border-[var(--sec)] py-2.5 px-4 rounded-xl bg-[var(--sec)] hover:opacity-90 hover:scale-[1.02]"
+                >
+                  <span>Play Demo</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+                    <path d="M19.376 12.4164L8.77734 19.4816C8.4542 19.697 8 19.4635 8 19.0652V4.93478C8 4.5365 8.4542 4.30303 8.77734 4.51842L19.376 11.5836C19.6385 11.7586 19.6385 12.2414 19.376 12.4164Z" />
+                  </svg>
+                </a>
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
