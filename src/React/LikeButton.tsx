@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
 import { doc, onSnapshot, updateDoc, increment } from "firebase/firestore";
 import { db } from "../firebase";
 
@@ -23,7 +23,7 @@ const LikeButton = () => {
       if (docSnap.exists()) {
         const currentLikes = docSnap.data().likes;
         // Only update if the server value is different (prevents overwrite during optimistic update)
-        setLikes((prev) => {
+        setLikes((_prev) => {
           const newLikes = Math.max(0, currentLikes);
           return newLikes;
         });
