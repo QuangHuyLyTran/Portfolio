@@ -4,9 +4,10 @@ interface Props {
 }
 
 const { title } = Astro.props;
-// Bạn có thể thay bằng username GitHub thực tế của bạn
-const siteUrl = "https://your-github-username.github.io/dark-minimal/";
-const baseUrl = import.meta.env.BASE_URL;
+
+// Lấy base URL từ môi trường Astro (sẽ trả về '/Portfolio/' khi build)
+const rawBase = import.meta.env.BASE_URL || "/";
+const baseUrl = rawBase.endsWith("/") ? rawBase.slice(0, -1) : rawBase;
 ---
 
 <!doctype html>
