@@ -7,7 +7,7 @@ interface Props {
 const { title = "Portfolio", description = "My Developer Portfolio" } = Astro.props;
 // Khai báo siteUrl ở đây để giải quyết lỗi Cannot find name 'siteUrl'
 const siteUrl = "https://quanghuylytran.github.io";
-// Lấy base URL từ môi trường Astro (sẽ trả về '/Portfolio/' khi build)
+// Lấy base URL từ môi trường Astro (sẽ trả về '/' khi chạy trên Vercel)
 const rawBase = import.meta.env.BASE_URL || "/";
 const baseUrl = rawBase.endsWith("/") ? rawBase.slice(0, -1) : rawBase;
 ---
@@ -44,7 +44,7 @@ const baseUrl = rawBase.endsWith("/") ? rawBase.slice(0, -1) : rawBase;
     />
     <meta
       property="og:image"
-      content={`${siteUrl}og.image.png`}
+      content={`${siteUrl}/og.image.png`}
     />
     <meta property="og:url" content={siteUrl} />
     <meta property="og:type" content="website" />
@@ -60,11 +60,10 @@ const baseUrl = rawBase.endsWith("/") ? rawBase.slice(0, -1) : rawBase;
         "@type": "Person",
         "name": "Lý Trần Huy Quang",
         "alternateName": "Quang Ly",
-        "url": "https://your-github-username.github.io/dark-minimal/",
-        "image": "https://your-github-username.github.io/dark-minimal/og.image.png",
+        "url": "https://quanghuylytran.github.io",
+        "image": "https://quanghuylytran.github.io/og.image.png",
         "sameAs": [
-          "https://github.com",
-          "https://linkedin.com"
+          "https://github.com/QuangHuyLyTran"
         ],
         "jobTitle": "Unity Game Developer",
         "description": "Unity Game Developer & Software Engineer crafting high-performance 2D/3D games and robust client-server systems."
@@ -111,7 +110,6 @@ const baseUrl = rawBase.endsWith("/") ? rawBase.slice(0, -1) : rawBase;
   }
 
   /* Scrollbar styles */
-
   ::-webkit-scrollbar {
     width: 15px;
   }
